@@ -1,7 +1,7 @@
 {
   "name": "quick-vue-components",
   "version": "1.1.0",
-  "description": "a vue ui component templete",
+  "description": "a vue  component frame",
   "scripts": {
     "test": "eslint lib/index.js",
     "serve": "vue-cli-service serve",
