@@ -1,6 +1,6 @@
 {
   "name": "quick-vue-components",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "a vue  component frame",
   "scripts": {
     "test": "eslint lib/index.js",
@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "vue": "^2.6.10",
-    "quick-vue-components": "^1.1.0"
+    "quick-vue-components": "^1.1.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.4.0",
