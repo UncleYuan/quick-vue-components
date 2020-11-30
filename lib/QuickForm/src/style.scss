@@ -1,0 +1,15 @@
+ .comp-quickform{
+     .el-upload {
+        width: 100%;
+        text-align: left;
+        &.el-upload--picture-card{
+            text-align: center;
+            width: 148px;
+        }
+     }
+    @media only screen and (max-width: 767px) {
+        .button-col-wrap{
+            margin-bottom: 15px;
+        }
+    }
+ }

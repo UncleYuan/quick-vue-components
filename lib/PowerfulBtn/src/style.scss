@@ -1,0 +1,18 @@
+ .powerful-btn{
+   @at-root &-wrap{
+        display: inline-block;
+
+      
+        & + .el-button,.el-button + &,& + &{
+            margin-left: 10px;
+        }
+        &.block{
+            display: block;
+        }
+        .el-dialog{
+            text-align: left;
+        }
+    }
+    
+ }
+

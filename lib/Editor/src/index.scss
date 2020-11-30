@@ -1,0 +1,33 @@
+.comp-editor-wrap{
+    &.disabled{
+        .tox-editor-header{
+            display:none;
+        }
+        .tox-tinymce{
+            border:none;
+
+        }
+        .tox-toolbar{
+            display:none;
+        }
+        .tox-statusbar{
+            display:none;
+        }
+        .mce-resizehandle,.ephox-snooker-resizer-cols{
+             display:none !important;
+
+        }
+        .mce-resizehandle{
+            display: none;
+        }
+    }
+}
+.editor-disabled{
+    .tox-toolbar[role=group],.tox .tox-pop.tox-pop--align-left::after,.tox .tox-pop.tox-pop--align-left::before,.tox .tox-menu{
+       display: none;
+    }
+}
+ 
+.tox-tinymce-aux{
+    z-index: 3150 !important;
+}

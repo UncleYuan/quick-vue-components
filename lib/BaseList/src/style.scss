@@ -1,0 +1,92 @@
+@mixin flexbox() {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+@mixin flex($values, $flexWidth: 100%) {
+  -webkit-box-flex: $values; /* OLD - iOS 6-, Safari 3.1-6 */
+  -moz-box-flex: $values; /* OLD - Firefox 19- */
+  width: $flexWidth; /* For old syntax, otherwise collapses. */
+  -webkit-flex: $values; /* Chrome */
+  -ms-flex: $values; /* IE 10 */
+  flex: $values; /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+
+@mixin flexBoxTopToBottom() {
+  -webkit-box-direction: normal;
+  -webkit-box-orient: vertical;
+  -moz-flex-direction: column;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+}
+
+.mb-m {
+  margin-bottom: 20px;
+}
+.tr {
+  text-align: right;
+}
+
+.base-list {
+  &-searchbar {
+    border-top: none !important;
+    border-bottom: none !important;
+    &-wrapper {
+      position: relative;
+      padding: 15px 70px 0 10px;
+      border: 1px solid #dcdfe6;
+      z-index: 2;
+      &-btns {
+        position: absolute;
+        right: -1px;
+        top: -1px;
+        bottom: -1px;
+        width: 55px;
+
+        @include flexBoxTopToBottom();
+        @include flexbox();
+        > .el-button {
+          width: 100%;
+          margin: 0 !important;
+          padding: 0;
+          display: block;
+          @include flex(1);
+         
+        
+          &:last-child {
+            border-top: none;
+          
+          }
+        }
+      }
+      .comp-quickform>.el-form>.el-row>.el-col{
+        height: 43px;
+     
+      }
+    }
+    > .el-collapse-item {
+      > div > .el-collapse-item__header {
+        display: none;
+      }
+      > .el-collapse-item__wrap {
+        border-bottom: none;
+        > .el-collapse-item__content {
+          padding-bottom: 0px;
+        }
+      }
+    }
+    .el-form-item__content {
+      > .el-select,
+      > .el-date-editor {
+        width: 100%;
+      }
+    }
+  }
+  &-btnbar {
+  }
+  &-cont {
+  }
+}

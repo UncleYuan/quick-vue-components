@@ -1,0 +1,74 @@
+@import "~element-ui/packages/theme-chalk/src/common/var.scss";
+@import "@/styles/element-newVars.scss";
+
+.card-panel {
+  transition:height 0.4s;
+  &.fullScreen {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: -1px;
+    right: 0;
+    z-index: 2000;
+    > .el-card__body {
+      height: calc(100% - 56px);
+      overflow: auto;
+    }
+  }
+  > .el-card__header {
+    position: relative;
+    
+    padding: 10px 18px;
+    &::before {
+      content: " ";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: $--color-primary;
+    }
+    .header-icon {
+      &-wrap {
+        position: absolute;
+        bottom:-1px;
+        right: 20px;
+      }
+      &-button {
+        cursor: pointer;
+    //    height:29px;
+        color: $--color-text-regular;
+        transition: color 0.4s ;
+        margin-right:15px;
+        display: inline-block;
+        vertical-align: middle;
+        &.showSearch{
+          // 显示搜索的状态 
+          color:$--color-primary;
+        }
+        &.hideSearch{
+          &:hover {
+            color: $--color-text-regular;
+          }
+        }
+        &:last-child{
+          margin-right: 0px;
+        }
+        &:hover {
+          color: rgba($--color-primary, 1);
+        }
+        >span{
+          transition: transform 0.4s;
+          display: inline-block;
+        }
+        &.rotate{
+          >span{
+            transform: rotateZ(180deg);
+          }
+         
+        }
+      }
+    }
+  }
+}
+
