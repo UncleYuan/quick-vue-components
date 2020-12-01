@@ -19,7 +19,21 @@ import "./style.scss";
 
 export default {
   name: "QuickForm",
+  components: {
+    Row,
+    Col,
+    FormItem,
+    Form
+  },
   mixins: [submitToServerMix],
+
+  /**
+   * 设置formvalue
+   */
+  model: {
+    prop: "value", // 要存在于props
+    event: "changeValue" // 当组件的值发生改变时要emit的事件名
+  },
   props: {
     resetBtnToClear: {
       type: Boolean,
@@ -126,26 +140,12 @@ export default {
       default: () => ({})
     }
   },
-  components: {
-    Row,
-    Col,
-    FormItem,
-    Form
-  },
   data() {
     return {
       formValue: this.value,
       valueFormulaMap: {},
       urlOptionsMap: {}
     };
-  },
-
-  /**
-   * 设置formvalue
-   */
-  model: {
-    prop: "value", // 要存在于props
-    event: "changeValue" // 当组件的值发生改变时要emit的事件名
   },
   // 监听formValue变化传递变化
   watch: {

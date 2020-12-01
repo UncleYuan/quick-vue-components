@@ -3,7 +3,8 @@
 /**
  * 封装Tree为高阶组件支持v-model,更加适应表单场景
  */
-import lodash from "lodash";
+import isEqual from "lodash/isEqual";
+import cloneDeep from "lodash/cloneDeep";
 import Tree from "element-ui/lib/tree";
 import Button from "element-ui/lib/button";
 import Pagination from "element-ui/lib/pagination";
@@ -55,7 +56,7 @@ export default {
       this.$emit("changeTreeValue", newVal);
     },
     value: function(newVal, oldVal) {
-      if (!lodash.isEqual(newVal, oldVal)) {
+      if (!isEqual(newVal, oldVal)) {
         this.setTreeValue(newVal);
       }
     }
@@ -67,7 +68,7 @@ export default {
     filterShowData() {
       if (this.pageSize) {
         return this.filterData(
-          lodash.cloneDeep(setTreeLvKeys(this.$props.data))
+          cloneDeep(setTreeLvKeys(this.$props.data))
         );
       } else {
         return this.$props.data;
@@ -143,7 +144,7 @@ export default {
       if (event) event.stopPropagation();
 
       this.paginationMap[data.lvKeys.join("-")].pageIndex = i;
-      this.paginationMap = lodash.cloneDeep(this.paginationMap);
+      this.paginationMap = cloneDeep(this.paginationMap);
     },
     pageRander(ref) {
       const orgNodeData = getTreeDataByLvKeys(this.$props.data, ref.data.lvKeys);

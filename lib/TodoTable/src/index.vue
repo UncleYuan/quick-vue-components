@@ -1,11 +1,7 @@
 <script>
- 
 
-import http from "../../utils/http";
-import lodash from "lodash";
-
-import TodoList from "./index";
-import DataTable from "../../DataTable";
+import TodoList from "../../TodoList/src";
+import DataTable from "../../DataTable/src";
 import "./style.scss";
 export default {
   name: "TodoTable",
@@ -18,7 +14,7 @@ export default {
     }
   },
   render(h) {
-    let { groupValue, className, rowRender } = this;
+    const { groupValue, className } = this;
     return (
       <div class={"comp-todolist-wrap " + className}>
         {this.EditItemRender()}
@@ -36,7 +32,7 @@ export default {
         <div class="comp-todolist-listGroup">
           <DataTable
             {...{
-              attrs: { selectRow: false, ...this.tableAttrs, ctrlData:true, data: groupValue }
+              attrs: { selectRow: false, ...this.tableAttrs, ctrlData: true, data: groupValue }
             }}
           />
         </div>

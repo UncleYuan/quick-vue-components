@@ -3,9 +3,9 @@
 </template>
 
 <script>
-import { get, post } from '../../utils/http';
+import request from '../../utils/request';
 import Button from "element-ui/lib/button";
-const http = { get, post };
+
 export default {
   name: "GetMessageButton",
   components: { Button },
@@ -33,7 +33,12 @@ export default {
   methods: {
     onBtnClick() {
       if (!this.url) return;
-      http.get(this.url, this.fetchData).then(d => {
+      request({
+        url: this.url,
+        method: "get",
+        params: this.fetchData
+
+      }).then(d => {
         console.log(d);
       });
     },
