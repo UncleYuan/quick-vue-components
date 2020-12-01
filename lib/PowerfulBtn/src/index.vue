@@ -1,5 +1,6 @@
-import Button from "element-ui/packages/button";
-import Dialog from "element-ui/packages/dialog";
+<script>
+import Button from "element-ui/lib/button";
+import Dialog from "element-ui/lib/dialog";
 import cx from "classnames";
 import QuickForm from "../../QuickForm";
 import submitToServerMix from "../../commonMix/submitToServerMix";
@@ -401,3 +402,4 @@ export default {
     );
   }
 };
+</script>

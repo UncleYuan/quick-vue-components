@@ -1,3 +1,6 @@
+<script>
+ 
+
 import http from "../../utils/http";
 import lodash from "lodash";
 
@@ -41,3 +44,4 @@ export default {
     );
   }
 };
+</script>

@@ -4,7 +4,7 @@
 
 <script>
 import { get, post } from '../../utils/http';
-import Button from "element-ui/packages/button";
+import Button from "element-ui/lib/button";
 const http = { get, post };
 export default {
   name: "GetMessageButton",

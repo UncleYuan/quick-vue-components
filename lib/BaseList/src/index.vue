@@ -1,11 +1,14 @@
+<script>
+ 
+
 import DataTable from "../../DataTable/src";
 import QuickForm from "../../QuickForm/src";
 import PowerfulBtn from "../../PowerfulBtn/src";
 import "./style.scss";
 import cloneDeep from 'lodash/cloneDeep';
-import Button from "element-ui/packages/button";
-import Carousel from "element-ui/packages/carousel";
-import CarouselItem from "element-ui/packages/carousel-item";
+import Button from "element-ui/lib/button";
+import Carousel from "element-ui/lib/carousel";
+import CarouselItem from "element-ui/lib/carousel-item";
 
 export const makePageUrl = url => {
   return d => `${url}?page_num=${d.pageNum}&page_size=${d.pageSize}`;
@@ -395,3 +398,4 @@ export default {
     );
   }
 };
+</script>

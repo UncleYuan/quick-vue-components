@@ -1,3 +1,4 @@
+<script>
 import indexOf from "lodash/indexOf";
 import isUndefined from "lodash/isUndefined";
 import findIndex from "lodash/findIndex";
@@ -6,11 +7,11 @@ import isFunction from "lodash/isFunction";
 import isEqual from "lodash/isEqual";
 import isArray from "lodash/isArray";
 
-import Button from "element-ui/packages/button";
-import Row from "element-ui/packages/row";
-import Col from "element-ui/packages/col";
-import Form from "element-ui/packages/form";
-import FormItem from "element-ui/packages/form-item";
+import Button from "element-ui/lib/button";
+import Row from "element-ui/lib/row";
+import Col from "element-ui/lib/col";
+import Form from "element-ui/lib/form";
+import FormItem from "element-ui/lib/form-item";
 import { memberComponents } from "./config";
 
 import submitToServerMix from "../../commonMix/submitToServerMix";
@@ -703,3 +704,4 @@ export default {
     );
   }
 };
+</script>

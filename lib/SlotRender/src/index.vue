@@ -1,3 +1,5 @@
+<script>
+ 
 
 export default {
   name: "SlotRender",
@@ -16,3 +18,4 @@ export default {
     return slotRender();
   }
 };
+</script>

@@ -9,7 +9,7 @@
 
 <script>
 import isArray from "lodash/isArray";
-import InputNumber from "element-ui/packages/input-number";
+import InputNumber from "element-ui/lib/input-number";
 
 /*
   数字范围组件

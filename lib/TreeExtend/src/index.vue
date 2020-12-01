@@ -4,10 +4,10 @@
  * 封装Tree为高阶组件支持v-model,更加适应表单场景
  */
 import lodash from "lodash";
-import Tree from "element-ui/packages/tree";
-import Button from "element-ui/packages/button";
-import Pagination from "element-ui/packages/pagination";
-import Input from "element-ui/packages/input";
+import Tree from "element-ui/lib/tree";
+import Button from "element-ui/lib/button";
+import Pagination from "element-ui/lib/pagination";
+import Input from "element-ui/lib/input";
 import "./style.scss";
 import { setTreeLvKeys, getTreeDataByLvKeys } from "../../utils";
 

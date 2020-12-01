@@ -1,3 +1,4 @@
+<script>
 import merge from "lodash/merge";
 import request from "../../utils/request";
 import "./index.scss";
@@ -564,3 +565,4 @@ export default {
     );
   }
 };
+</script>

@@ -49,9 +49,9 @@ import cloneDeep from "lodash/cloneDeep";
 
 import { setTimer } from "../../utils/timer";
 import moment from "moment";
-import DatePicker from "element-ui/packages/date-picker";
-import Tag from "element-ui/packages/tag";
-import Button from "element-ui/packages/button";
+import DatePicker from "element-ui/lib/date-picker";
+import Tag from "element-ui/lib/tag";
+import Button from "element-ui/lib/button";
 
 export default {
   name: "DateTimeRanges",

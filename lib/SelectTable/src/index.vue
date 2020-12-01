@@ -1,7 +1,10 @@
+<script>
+ 
+
 import BaseList from "../../BaseList";
 import MakeDialogMix from "../../commonMix/MakeDialogMix";
-import Tag from "element-ui/packages/tag";
-import Button from "element-ui/packages/button";
+import Tag from "element-ui/lib/tag";
+import Button from "element-ui/lib/button";
 import "./style.scss";
 export default {
   name: "SelectTable",
@@ -129,3 +132,4 @@ export default {
     );
   }
 };
+</script>

@@ -1,4 +1,6 @@
-import Pagination from "element-ui/packages/card";
+<script>
+ 
+import Pagination from "element-ui/lib/card";
 import loadDataMix from "../../commonMix/loadDataMix";
 export default {
   name: "DataList",
@@ -55,3 +57,4 @@ export default {
     );
   }
 };
+</script>
