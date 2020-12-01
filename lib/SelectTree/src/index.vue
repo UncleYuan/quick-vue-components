@@ -3,7 +3,7 @@
 /**
  * 封装Tree为高阶组件支持v-model,更加适应表单场景
  */
-import lodash from "lodash";
+import isEqual from "lodash/isEqual";
 import TreeExtend from "../../TreeExtend";
 import "./style.scss";
 export default {
@@ -32,7 +32,7 @@ export default {
       this.$emit("changeTreeValue", newVal);
     },
     value: function(newVal, oldVal) {
-      if (!lodash.isEqual(newVal, oldVal)) {
+      if (!isEqual(newVal, oldVal)) {
         this.setTreeValue(newVal);
       }
     }

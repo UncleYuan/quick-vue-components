@@ -2,7 +2,6 @@
 
   <TreeExtend
     v-model="treeValue"
-
     node-key="value"
     :data="setProps.data"
     :get-label="true"
@@ -12,10 +11,11 @@
 </template>
 
 <script>
-import lodash from "lodash";
+import isEqual from "lodash/isEqual";
+import TreeExtend from "./TreeExtend";
 export default {
   name: "TreeExtendSelect",
-  components: {},
+  components: { TreeExtend },
   model: {
     prop: "value", // 要存在于props
     event: "changeTreeExtendSelectValue" // 当组件的值发生改变时要emit的事件名
@@ -41,7 +41,7 @@ export default {
       this.$emit("changeTreeExtendSelectValue", newVal);
     },
     value: function(newVal, oldVal) {
-      if (!lodash.isEqual(newVal, oldVal)) {
+      if (!isEqual(newVal, oldVal)) {
         this.treeValue = newVal;
       }
     }

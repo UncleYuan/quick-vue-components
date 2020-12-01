@@ -1,13 +1,14 @@
 <template>
-  <el-button type="primary" @click="onBtnClick">{{ defaultText }}</el-button>
+  <Button type="primary" @click="onBtnClick">{{ defaultText }}</Button>
 </template>
 
 <script>
 import { get, post } from '../../utils/http';
+import Button from "element-ui/packages/button";
 const http = { get, post };
 export default {
   name: "GetMessageButton",
-
+  components: { Button },
   props: {
     defaultText: {
       type: String,

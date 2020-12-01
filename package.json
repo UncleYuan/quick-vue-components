@@ -1,6 +1,6 @@
 {
   "name": "quick-vue-components",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "a vue  component frame",
   "scripts": {
     "test": "eslint lib/index.js",
@@ -10,8 +10,16 @@
     "lib": "vue-cli-service build --target lib --name index --dest package lib/index.js"
   },
   "dependencies": {
+    "axios": "^0.21.0",
+    "classnames": "^2.2.6",
+    "element-ui": "^2.14.1",
+    "jquery": "^3.5.1",
+    "lodash": "^4.17.20",
+    "moment": "^2.29.1",
+    "quick-vue-components": "^1.1.2",
+    "sass-loader": "^10.1.0",
     "vue": "^2.6.10",
-    "quick-vue-components": "^1.1.1"
+    "vue-quill-editor": "^3.0.6"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.4.0",

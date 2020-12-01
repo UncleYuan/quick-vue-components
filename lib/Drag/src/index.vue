@@ -1,6 +1,7 @@
 <script>
-import lodash from "lodash";
 
+import cloneDeep from "lodash/cloneDeep";
+import isEqual from "lodash/isEqual";
 import $ from "jquery";
 var initState = {
   s: {
@@ -100,7 +101,7 @@ export default {
       width: this.value.width,
       height: this.value.height,
 
-      mouseState: lodash.cloneDeep(initState)
+      mouseState: cloneDeep(initState)
     };
   },
   computed: {},
@@ -109,7 +110,7 @@ export default {
 
     value: function(newVal, oldVal) {
       const nowShape = this.getNowShapeState();
-      if (!lodash.isEqual(newVal, nowShape)) {
+      if (!isEqual(newVal, nowShape)) {
         this.left = newVal.left;
         this.top = newVal.top;
         this.width = newVal.width;
@@ -387,7 +388,7 @@ export default {
       if (this.mouseState.keyDown) {
         document.removeEventListener("mousemove", this.bindMove, false);
         document.removeEventListener("mouseup", this.bindUp, false);
-        this.mouseState = lodash.cloneDeep(initState);
+        this.mouseState = cloneDeep(initState);
       }
     }
   },
