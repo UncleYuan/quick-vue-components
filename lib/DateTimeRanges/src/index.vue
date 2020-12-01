@@ -1,7 +1,7 @@
 <template>
   <div>
     <div style="height: 0; overflow: hidden">
-      <el-date-picker
+      <DatePicker
         ref="timerange"
         v-model="timerangeValue"
         type="datetimerange"
@@ -12,10 +12,10 @@
         :picker-options="{disabledDate:disabledDate}"
         @blur="sureChangeTimer"
       >
-      </el-date-picker>
+      </DatePicker>
     </div>
 
-    <el-tag
+    <Tag
       v-for="(timerange, i) in list"
       :key="timerange.startTime + '~' + timerange.endTime"
       :disable-transitions="false"
@@ -31,26 +31,32 @@
         class="el-icon-close pointer"
         @click="handleClose(i)"
       ></i>
-    </el-tag>
-    <el-button
+    </Tag>
+    <Button
       v-if="!disabled"
       class="button-new-tag"
       size="small"
       @click="showDatePicker"
     >
       添加时间
-    </el-button>
+    </Button>
   </div>
 </template>
 
 <script>
-import lodash from "lodash";
+import isArray from "lodash/isArray";
+import cloneDeep from "lodash/cloneDeep";
+
 import { setTimer } from "../../utils/timer";
 import moment from "moment";
+import DatePicker from "element-ui/packages/date-picker";
+import Tag from "element-ui/packages/tag";
+import Button from "element-ui/packages/button";
+
 export default {
   name: "DateTimeRanges",
 
-  components: {},
+  components: { DatePicker, Tag, Button },
   model: {
     prop: "value", // 要存在于props
     event: "changeDateTimeRangesValue" // 当组件的值发生改变时要emit的事件名
@@ -68,9 +74,9 @@ export default {
 
   data() {
     return {
-      timerangeValue: lodash.isArray(this.value) ? lodash.cloneDeep(this.value) : [],
+      timerangeValue: isArray(this.value) ? cloneDeep(this.value) : [],
       editIdx: -1,
-      list: lodash.cloneDeep(this.value)
+      list: cloneDeep(this.value)
     };
   },
   computed: {},
@@ -80,7 +86,7 @@ export default {
       this.$emit("changeDateTimeRangesValue", newVal);
     },
     value: function(newVal, oldVal) {
-      if (lodash.isArray(newVal)) {
+      if (isArray(newVal)) {
         this.list = newVal;
       }
     }

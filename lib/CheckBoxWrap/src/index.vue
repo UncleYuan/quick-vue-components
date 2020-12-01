@@ -1,7 +1,7 @@
 <template>
   <div>
-    <el-radio v-if="isToggleOptions" v-model="isShowOptions" label="1">有</el-radio>
-    <el-radio v-if="isToggleOptions" v-model="isShowOptions" label="0">无</el-radio>
+    <Radio v-if="isToggleOptions" v-model="isShowOptions" label="1">有</Radio>
+    <Radio v-if="isToggleOptions" v-model="isShowOptions" label="0">无</Radio>
     <div v-if="!isToggleOptions||(isToggleOptions&&isShowOptions=='1')" style="display:inline-block">
       <component :is="comNameWrap" v-model="changeValue">
         <component
@@ -14,7 +14,7 @@
     </div>
 
     <div style="display:inline-block;margin-left:15px;vertical-align: middle;">
-      <el-input v-if="isTextValue&&isAddInput" v-model="addTextValue" placeholder="其他" />
+      <Input v-if="isTextValue&&isAddInput" v-model="addTextValue" placeholder="其他" />
     </div>
     <i
       v-if="isTextValue"
@@ -28,11 +28,25 @@
 /**
  * 封装checkbox为高阶组件支持v-model,更加适应表单场景
  */
-import lodash from "lodash";
+import isEqual from "lodash/isEqual";
+import isArray from "lodash/isArray";
+import isString from "lodash/isString";
+import Radio from "element-ui/packages/radio";
+import Input from "element-ui/packages/input";
+import CheckboxGroup from "element-ui/packages/checkbox-group";
+import RadioGroup from "element-ui/packages/radio-group";
+import Checkbox from "element-ui/packages/checkbox";
 
 import "./style.scss";
 export default {
   name: "CheckBoxWrap",
+  components: {
+    Radio,
+    Input,
+    CheckboxGroup,
+    RadioGroup,
+    Checkbox
+  },
   model: {
     prop: "value", // 要存在于props
     event: "changeCheckBoxWrapValue" // 当组件的值发生改变时要emit的事件名
@@ -66,8 +80,8 @@ export default {
         this.isTextValue && this.value.checkedValue
           ? this.propCheckedToSetDataChecked(this.value.checkedValue)
           : this.propCheckedToSetDataChecked(this.value),
-      comNameWrap: this.multiple ? "el-checkbox-group" : "el-radio-group",
-      comName: this.multiple ? "el-checkbox" : "el-radio",
+      comNameWrap: this.multiple ? CheckboxGroup : RadioGroup,
+      comName: this.multiple ? Checkbox : Radio,
       addTextValue:
         this.isTextValue && this.value.textValue ? this.value.textValue : ""
     };
@@ -102,7 +116,7 @@ export default {
       this.$emit("changeCheckBoxWrapValue", resValue);
     },
     value: function(newVal, oldVal) {
-      if (!lodash.isEqual(newVal, oldVal)) {
+      if (!isEqual(newVal, oldVal)) {
         if (this.isTextValue) {
           if (newVal.checkedValue) {
             this.changeValue = this.propCheckedToSetDataChecked(
@@ -128,22 +142,16 @@ export default {
   mounted() {},
   methods: {
     dataCheckedToSetPropChecked(checkedValue) {
-      // return lodash.isArray(checkedValue)
-      //   ? checkedValue.join(",")
-      //   : lodash.isString(checkedValue) || !this.multiple
-      //   ? checkedValue
-      //   : ``;
-
-      return lodash.isArray(checkedValue)
+      return isArray(checkedValue)
         ? checkedValue
-        : lodash.isString(checkedValue) || !this.multiple
+        : isString(checkedValue) || !this.multiple
           ? checkedValue
           : [];
     },
     propCheckedToSetDataChecked(checkedValue) {
-      return lodash.isArray(checkedValue) || !this.multiple
+      return isArray(checkedValue) || !this.multiple
         ? checkedValue
-        : lodash.isString(checkedValue) && this.multiple
+        : isString(checkedValue) && this.multiple
           ? checkedValue.split(",")
           : [];
     },

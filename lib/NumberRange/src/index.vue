@@ -1,19 +1,24 @@
 <template>
   <div class="number-range-wrap">
-    <el-input-number v-model="rangeValue[0]" :max="rangeValue[1]?rangeValue[1]:undefined" />
+    <InputNumber v-model="rangeValue[0]" :max="rangeValue[1]?rangeValue[1]:undefined" />
     <span v-if="joinText" class="join-text">{{ joinText }}</span>
-    <el-input-number v-model="rangeValue[1]" :min="rangeValue[0]?rangeValue[0]:0" />
+    <InputNumber v-model="rangeValue[1]" :min="rangeValue[0]?rangeValue[0]:0" />
     <span v-if="unitText" class="unit-text">{{ unitText }}</span>
   </div>
 </template>
 
 <script>
-import lodash from "lodash";
+import isArray from "lodash/isArray";
+import InputNumber from "element-ui/packages/input-number";
+
 /*
   数字范围组件
 */
 export default {
   name: 'NumberRange',
+  components: {
+    InputNumber
+  },
   model: {
     prop: "value",
     event: "changeNumberRangeValue"
@@ -45,7 +50,7 @@ export default {
       }
     },
     value(newVal) {
-      if (newVal && lodash.isArray(newVal)) {
+      if (newVal && isArray(newVal)) {
         this.rangeValue = newVal;
       }
     }

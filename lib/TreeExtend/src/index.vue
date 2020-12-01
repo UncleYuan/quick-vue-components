@@ -4,7 +4,10 @@
  * 封装Tree为高阶组件支持v-model,更加适应表单场景
  */
 import lodash from "lodash";
-import { Tree } from "element-ui";
+import Tree from "element-ui/packages/tree";
+import Button from "element-ui/packages/button";
+import Pagination from "element-ui/packages/pagination";
+import Input from "element-ui/packages/input";
 import "./style.scss";
 import { setTreeLvKeys, getTreeDataByLvKeys } from "../../utils";
 
@@ -147,14 +150,14 @@ export default {
       return !this.searchKey &&
         orgNodeData.children &&
         orgNodeData.children.length ? (
-          <el-pagination
+          <Pagination
             layout="prev, pager, next"
             page-size={this.pageSize}
             pager-count={3}
             size="mini"
             oncurrent-change={(i) => this.onPageIndexChange(i, ref.data)}
             total={orgNodeData.children.length}
-          ></el-pagination>
+          ></Pagination>
         ) : (
           <span></span>
         );
@@ -207,7 +210,7 @@ export default {
         },
         [
           h(
-            "el-input",
+            Input,
             {
               staticClass: "pagination-search",
               model: {
@@ -224,7 +227,7 @@ export default {
               }
             },
             [
-              h("el-button", {
+              h(Button, {
                 attrs: { slot: "append", icon: "el-icon-search" },
                 on: {
                   click: () => {

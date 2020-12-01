@@ -3,7 +3,7 @@
     <div ref="menuWrap" class="menu">
       <div class="menu-header">选择要展示的表头项</div>
       <div class="menu-check-wrap">
-        <el-checkbox
+        <Checkbox
           v-model="checkAll"
           :style="{
             display:'block',
@@ -13,9 +13,9 @@
           }"
           :indeterminate="isIndeterminate"
           @change="handleCheckAllChange"
-        >全选</el-checkbox>
-        <el-checkbox-group v-model="checkedHeaders" @change="handleCheckedHeadersChange">
-          <el-checkbox
+        >全选</Checkbox>
+        <CheckboxGroup v-model="checkedHeaders" @change="handleCheckedHeadersChange">
+          <Checkbox
             v-for="(header ) in headers"
             :key="header.prop"
             :label="header.prop"
@@ -25,17 +25,22 @@
               padding:'5px',
 
             }"
-          >{{ header.label }}</el-checkbox>
-        </el-checkbox-group>
+          >{{ header.label }}</Checkbox>
+        </CheckboxGroup>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-
+import Checkbox from "element-ui/packages/checkbox";
+import CheckboxGroup from "element-ui/packages/checkbox-group";
 import $ from "jquery";
 export default {
+  components: {
+    Checkbox,
+    CheckboxGroup
+  },
   props: {
     getTableObj: {
       type: Function,

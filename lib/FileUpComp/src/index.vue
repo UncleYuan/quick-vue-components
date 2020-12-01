@@ -1,10 +1,10 @@
 <script>
-import _ from "lodash";
-import { Upload } from "element-ui";
+import isString from "lodash/isString";
+import isArray from "lodash/isArray";
+import Upload from "element-ui/packages/upload";
 
 export default {
   name: "FileUpComp",
-
   components: {
     Upload
   },
@@ -37,13 +37,13 @@ export default {
   methods: {
     filterValue(val) {
       let res = [];
-      if (val && _.isString(val)) {
+      if (val && isString(val)) {
         try {
           res = JSON.parse(val);
         } catch (e) {
           console.log("转换字符串fileDataList数组失败");
         }
-      } else if (_.isArray(val)) {
+      } else if (isArray(val)) {
         res = val;
       }
       return res;
