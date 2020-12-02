@@ -1,11 +1,13 @@
+<script>
+
 import DataTable from "../../DataTable/src";
 import QuickForm from "../../QuickForm/src";
 import PowerfulBtn from "../../PowerfulBtn/src";
 import "./style.scss";
 import cloneDeep from 'lodash/cloneDeep';
-import Button from "element-ui/packages/button";
-import Carousel from "element-ui/packages/carousel";
-import CarouselItem from "element-ui/packages/carousel-item";
+import Button from "element-ui/lib/button";
+import Carousel from "element-ui/lib/carousel";
+import CarouselItem from "element-ui/lib/carousel-item";
 
 export const makePageUrl = url => {
   return d => `${url}?page_num=${d.pageNum}&page_size=${d.pageSize}`;
@@ -25,6 +27,15 @@ export const makeFetchDataFilter = params => {
 export default {
   name: "BaseList",
   tabName: "基础列表",
+  components: {
+    DataTable,
+    QuickForm,
+    PowerfulBtn,
+    Button,
+    Carousel,
+    CarouselItem
+  },
+  model: DataTable.model,
   props: {
     afterMounted: {
       // 当组件渲染完成时的回调
@@ -80,6 +91,7 @@ export default {
       type: Object,
       default: () => ({})
     },
+    // eslint-disable-next-line vue/require-default-prop
     selections: DataTable.props.selections,
     searchFormAttr: {
       // 直接设置到 组件内的 搜索框  QuickForm 组件的属性
@@ -123,15 +135,6 @@ export default {
       default: false
     }
   },
-  components: {
-    DataTable,
-    QuickForm,
-    PowerfulBtn,
-    Button,
-    Carousel,
-    CarouselItem
-  },
-  model: DataTable.model,
   data() {
     return {
       val: {},
@@ -155,6 +158,14 @@ export default {
     showSearchForm() {
       this.toggleSearchTime = new Date().valueOf();
     }
+  },
+
+  created() {},
+  mounted() {
+    this.afterMounted(this);
+  },
+  destroyed() {
+    this.afterDestroyed(this);
   },
 
   methods: {
@@ -312,14 +323,6 @@ export default {
     }
   },
 
-  created() {},
-  mounted() {
-    this.afterMounted(this);
-  },
-  destroyed() {
-    this.afterDestroyed(this);
-  },
-
   render(h) {
     const {
       tableHeader,
@@ -395,3 +398,4 @@ export default {
     );
   }
 };
+</script>

@@ -31,11 +31,11 @@
 import isEqual from "lodash/isEqual";
 import isArray from "lodash/isArray";
 import isString from "lodash/isString";
-import Radio from "element-ui/packages/radio";
-import Input from "element-ui/packages/input";
-import CheckboxGroup from "element-ui/packages/checkbox-group";
-import RadioGroup from "element-ui/packages/radio-group";
-import Checkbox from "element-ui/packages/checkbox";
+import Radio from "element-ui/lib/radio";
+import Input from "element-ui/lib/input";
+import CheckboxGroup from "element-ui/lib/checkbox-group";
+import RadioGroup from "element-ui/lib/radio-group";
+import Checkbox from "element-ui/lib/checkbox";
 
 import "./style.scss";
 export default {

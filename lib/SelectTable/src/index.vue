@@ -1,16 +1,28 @@
+<script>
+
 import BaseList from "../../BaseList";
 import MakeDialogMix from "../../commonMix/MakeDialogMix";
-import Tag from "element-ui/packages/tag";
-import Button from "element-ui/packages/button";
+import Tag from "element-ui/lib/tag";
+import Button from "element-ui/lib/button";
 import "./style.scss";
 export default {
   name: "SelectTable",
+  components: {
+    BaseList,
+    Button,
+    Tag
+
+  },
   mixins: [
     MakeDialogMix("selectModal", function(_this) {
       return { title: _this.modalConf.title, width: _this.modalConf.width };
     })
   ],
   tabName: "选择表格",
+  model: {
+    prop: "value", // 要存在于props
+    event: "changeSelectTableSelection" // 当组件的值发生改变时要emit的事件名
+  },
   props: {
     baseListAttrs: {
       type: Object,
@@ -36,15 +48,12 @@ export default {
     //   default:
     // }
   },
-  components: {
-    BaseList,
-    Button,
-    Tag
 
-  },
-  model: {
-    prop: "value", // 要存在于props
-    event: "changeSelectTableSelection" // 当组件的值发生改变时要emit的事件名
+  data() {
+    return {
+      selectModalDialogVisible: false,
+      mutipleSelection: this.value || []
+    };
   },
   watch: {
 
@@ -84,10 +93,11 @@ export default {
       this.selectModalDialogVisible = !this.selectModalDialogVisible;
     },
     renderContent(_this) {
-      const h = this.$createElement;
+      // const h = this.$createElement;
       return [
         <div class="select-table-content-wrap">
           {this.mutipleSelection.map((item, idx) => {
+            // eslint-disable-next-line
             return h(
               Tag,
               {
@@ -100,25 +110,21 @@ export default {
               item[this.showKey]
             );
           })}
-          {h(
-            Button,
-            {
-              attrs: { size: "small" },
-              on: {
-                click: $event => this.toggleModal()
-              }
-            },
-            "选择"
-          )}
+          {
+            // eslint-disable-next-line
+            h(
+              Button,
+              {
+                attrs: { size: "small" },
+                on: {
+                  click: $event => this.toggleModal()
+                }
+              },
+              "选择"
+            )}
         </div>
       ];
     }
-  },
-  data() {
-    return {
-      selectModalDialogVisible: false,
-      mutipleSelection: this.value || []
-    };
   },
   render(h) {
     return (
@@ -129,3 +135,4 @@ export default {
     );
   }
 };
+</script>

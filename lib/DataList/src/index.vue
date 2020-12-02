@@ -1,17 +1,19 @@
-import Pagination from "element-ui/packages/card";
+<script>
+
+import Pagination from "element-ui/lib/card";
 import loadDataMix from "../../commonMix/loadDataMix";
 export default {
   name: "DataList",
+  components: {
+
+    Pagination
+  },
   mixins: [loadDataMix],
   props: {
     listStyle: {
       type: Object,
       default: () => ({})
     }
-  },
-  components: {
-
-    Pagination
   },
 
   render(h) {
@@ -55,3 +57,4 @@ export default {
     );
   }
 };
+</script>

@@ -1,10 +1,20 @@
-import http from "../../utils/http";
-import lodash from "lodash";
+<script>
 
-import QuickForm from "../../QuickForm";
+import request from "../../utils/request";
+import cloneDeep from "lodash/cloneDeep";
+
+import QuickForm from "../../QuickForm/src";
 import "./style.scss";
 export default {
   name: "TodoList",
+  components: {},
+  /**
+   * 设置formvalue
+   */
+  model: {
+    prop: "value", // 要存在于props
+    event: "changeTodoListValue" // 当组件的值发生改变时要emit的事件名
+  },
 
   props: {
     typeTitle: {
@@ -143,6 +153,7 @@ export default {
         disabled,
         vm
       ) => {
+        // eslint-disable-next-line no-unused-vars
         const h = createElement;
 
         return [
@@ -198,13 +209,13 @@ export default {
       }
     }
   },
-  components: {},
-  /**
-   * 设置formvalue
-   */
-  model: {
-    prop: "value", // 要存在于props
-    event: "changeTodoListValue" // 当组件的值发生改变时要emit的事件名
+  data() {
+    return {
+      groupValue: this.value || this.options || [],
+      editDialogVisible: false,
+      editFormValue: {},
+      editType: "add"
+    };
   },
   // 监听formValue变化传递变化
   watch: {
@@ -218,14 +229,6 @@ export default {
       this.groupValue = newVal;
     }
   },
-  data() {
-    return {
-      groupValue: this.value || this.options || [],
-      editDialogVisible: false,
-      editFormValue: {},
-      editType: "add"
-    };
-  },
   created() {
     if (this.urlMap.get) {
       this.loadData("get", this.urlMap.get, this.methodMap.get, {}, res => {
@@ -236,14 +239,17 @@ export default {
   methods: {
     loadData(type, url, fetchType, fetchData, cb) {
       console.log("loading.....");
-      http[fetchType](url, this.fetchDataFilter(fetchData, type))
-        .then(res => {
-          res = this.resDataFilter(res, type);
-          if (this.isSuccess(res, type)) {
-            this.afterLoadDataSuccess(res, type);
-            cb(res, type);
-          }
-        })
+      request({
+        url: url,
+        method: fetchType,
+        [fetchType == "get" ? "params" : "data"]: this.fetchDataFilter(fetchData, type)
+      }).then(res => {
+        res = this.resDataFilter(res, type);
+        if (this.isSuccess(res, type)) {
+          this.afterLoadDataSuccess(res, type);
+          cb(res, type);
+        }
+      })
         .catch(err => {
           console.log(err);
           const errMsg = err.message || err.msg;
@@ -289,7 +295,7 @@ export default {
       this.groupValue.splice(idx + move, 0, moveItem);
     },
     getJson(obj) {
-      const setVal = lodash.cloneDeep(obj);
+      const setVal = cloneDeep(obj);
       delete setVal.isTrusted;
       return setVal;
     },
@@ -450,3 +456,4 @@ export default {
     );
   }
 };
+</script>

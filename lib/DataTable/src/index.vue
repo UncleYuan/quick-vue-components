@@ -1,25 +1,37 @@
+<script>
 import isArray from "lodash/isArray";
 import isEqual from "lodash/isEqual";
 import findIndex from "lodash/findIndex";
 import $ from "jquery";
-import Table from "element-ui/packages/table";
-import TableColumn from "element-ui/packages/table-column";
-import Pagination from "element-ui/packages/pagination";
-import Popover from "element-ui/packages/popover";
+import Table from "element-ui/lib/table";
+import TableColumn from "element-ui/lib/table-column";
+import Pagination from "element-ui/lib/pagination";
+import Popover from "element-ui/lib/popover";
 import "./style.scss";
 import loadDataMix from "../../commonMix/loadDataMix";
 import HeaderMenu from "./HeaderMenu";
 
 export default {
   name: "DataTable",
+  components: {
+    Table,
+    TableColumn,
+    Pagination,
+    Popover,
+    HeaderMenu
+  },
   mixins: [loadDataMix],
+  model: {
+    prop: "selections", // 要存在于props
+    event: "changeSelection" // 当组件的值发生改变时要emit的事件名
+  },
   props: {
     /**
      * 设置内部table的属性
      */
     tableAttrs: {
       type: Object,
-      default: {}
+      default: () => ({})
     },
     /**
      * table的头部渲染，跟element table参数对应
@@ -63,16 +75,23 @@ export default {
       default: () => []
     }
   },
-  components: {
-    Table,
-    TableColumn,
-    Pagination,
-    Popover,
-    HeaderMenu
+
+  data() {
+    return {
+      mutipleSelection: this.selections || [],
+      showHeadersState: this.initShowHeadersState()
+    };
   },
-  model: {
-    prop: "selections", // 要存在于props
-    event: "changeSelection" // 当组件的值发生改变时要emit的事件名
+  computed: {
+    showHeaders() {
+      return this.filterHeaders(this.tableHeader, o => {
+        return {
+          ...o,
+          hidden:
+             findIndex(this.showHeadersState, obj => obj == o.prop) < 0
+        };
+      });
+    }
   },
   watch: {
     mutipleSelection: function(newVal, oldVal) {
@@ -93,24 +112,6 @@ export default {
           this.$refs.table.doLayout();
         });
       }
-    }
-  },
-
-  data() {
-    return {
-      mutipleSelection: this.selections || [],
-      showHeadersState: this.initShowHeadersState()
-    };
-  },
-  computed: {
-    showHeaders() {
-      return this.filterHeaders(this.tableHeader, o => {
-        return {
-          ...o,
-          hidden:
-             findIndex(this.showHeadersState, obj => obj == o.prop) < 0
-        };
-      });
     }
   },
   created() {},
@@ -332,3 +333,4 @@ export default {
     );
   }
 };
+</script>

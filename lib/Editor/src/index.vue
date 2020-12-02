@@ -1,3 +1,4 @@
+<script>
 import merge from "lodash/merge";
 import request from "../../utils/request";
 import "./index.scss";
@@ -36,6 +37,14 @@ function unmousewheel(obj, fn) {
 
 export default {
   name: "Editor",
+  components: {},
+  /**
+   * 设置formvalue
+   */
+  model: {
+    prop: "value", // 要存在于props
+    event: "changeValue" // 当组件的值发生改变时要emit的事件名
+  },
 
   props: {
     fileUploadConf: {
@@ -95,13 +104,10 @@ export default {
       default: res => res
     }
   },
-  components: {},
-  /**
-   * 设置formvalue
-   */
-  model: {
-    prop: "value", // 要存在于props
-    event: "changeValue" // 当组件的值发生改变时要emit的事件名
+  data() {
+    return {
+      editorValue: this.value || ""
+    };
   },
   // 监听formValue变化传递变化
   watch: {
@@ -119,11 +125,6 @@ export default {
         this.init();
       }
     }
-  },
-  data() {
-    return {
-      editorValue: this.value || ""
-    };
   },
   mounted() {
     setTimeout(() => {
@@ -564,3 +565,4 @@ export default {
     );
   }
 };
+</script>

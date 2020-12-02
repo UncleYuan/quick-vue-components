@@ -1,17 +1,28 @@
-import Button from "element-ui/packages/button";
-import Dialog from "element-ui/packages/dialog";
+<script>
+import Button from "element-ui/lib/button";
+import Dialog from "element-ui/lib/dialog";
 import cx from "classnames";
 import QuickForm from "../../QuickForm";
 import submitToServerMix from "../../commonMix/submitToServerMix";
 import "./style.scss";
-import { get, post } from "../../utils/http";
-const http = { get, post };
+import request from "../../utils/request";
+
 export default {
   name: "PowerfulBtn",
+  components: {
+    Button,
+    QuickForm
+  },
   mixins: [submitToServerMix],
+  model: {
+    prop: "value", // 要存在于props
+    event: "changePowerfulBtnValue" // 当组件的值发生改变时要emit的事件名
+  },
   props: {
     asDom: {
-      type: [String, Object]
+
+      type: [String, Object],
+      default: ""
     },
     noWrap: {
       type: [Boolean, String],
@@ -120,19 +131,11 @@ export default {
 
     // 当为form类型时，自动获取表单回填数据部分 end
   },
-  components: {
-    Button,
-    QuickForm
-  },
   data() {
     return {
       formValue: this.value,
       dialogVisible: false
     };
-  },
-  model: {
-    prop: "value", // 要存在于props
-    event: "changePowerfulBtnValue" // 当组件的值发生改变时要emit的事件名
   },
   watch: {
     value: function(newVal) {
@@ -226,10 +229,12 @@ export default {
           Object.assign({}, getFormDataFetchData, mergeData)
         );
         // 最终请求带过去的参数
-        let res = await http[getFormDataFetchType](
-          getFormDataUrl,
-          getFormDataFetchDataParams
-        );
+        let res = await request({
+          url: getFormDataUrl,
+          method: getFormDataFetchType,
+          [getFormDataFetchType == "get" ? "params" : "data"]: getFormDataFetchDataParams
+
+        });
 
         try {
           res = defaultResFilter(res);
@@ -401,3 +406,4 @@ export default {
     );
   }
 };
+</script>
