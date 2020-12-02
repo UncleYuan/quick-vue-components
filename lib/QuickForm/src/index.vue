@@ -18,6 +18,7 @@ import submitToServerMix from "../../commonMix/submitToServerMix";
 import "./style.scss";
 
 export default {
+  memberComponents,
   name: "QuickForm",
   components: {
     Row,
@@ -67,6 +68,10 @@ export default {
     // 设置Form的props
     formProps: {
       type: Object,
+      default: () => {}
+    },
+    formSize: {
+      type: [String],
       default: () => {}
     },
     disabled: {
@@ -658,12 +663,14 @@ export default {
 
       buttonGroupColConfig,
       formProps,
+      formSize,
       buttonGroupRender,
       isSlotRender
     } = this;
 
     const formAttrs = {
       ...formProps,
+      size: formSize || undefined,
       model: formValue
     };
     const { style, ...otherBtnColAttrs } = buttonGroupColConfig || {};

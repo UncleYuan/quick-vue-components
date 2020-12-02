@@ -3,8 +3,8 @@ import isArray from "lodash/isArray";
 import isEqual from "lodash/isEqual";
 import findIndex from "lodash/findIndex";
 import $ from "jquery";
-import Table from "element-ui/lib/table";
-import TableColumn from "element-ui/lib/table-column";
+import ElTable from "element-ui/lib/table";
+import ElTableColumn from "element-ui/lib/table-column";
 import Pagination from "element-ui/lib/pagination";
 import Popover from "element-ui/lib/popover";
 import "./style.scss";
@@ -14,8 +14,8 @@ import HeaderMenu from "./HeaderMenu";
 export default {
   name: "DataTable",
   components: {
-    Table,
-    TableColumn,
+    // ElTable,
+    // ElTableColumn,
     Pagination,
     Popover,
     HeaderMenu
@@ -187,14 +187,14 @@ export default {
     headerRender(tableHeader) {
       return tableHeader && tableHeader.length && !this.$slots.default
         ? tableHeader.map(item => (
-          <TableColumn
+          <el-table-column
             {...{ props: item }}
             prop={item.prop}
             label={item.label}
             scopedSlots={this.headerColScopedSlotsRender(item)}
           >
-            {this.headerRender(item.children)}
-          </TableColumn>
+            {item.children ? this.headerRender(item.children) : null}
+          </el-table-column>
         ))
         : (this.$slots.default || null);
     },
@@ -295,7 +295,7 @@ export default {
             props: { getTableObj: () => this }
           }}
         />
-        <Table
+        <el-table
           ref="table"
           {...{
             directives: [
@@ -312,10 +312,10 @@ export default {
           data={ isArray(listData) ? listData : []}
         >
           {selectRow ? (
-            <TableColumn width={35} label="" type="selection" />
+            <el-table-column width={35} label="" type="selection" />
           ) : null}
           {showIdxCol ? (
-            <TableColumn
+            <el-table-column
               width={60}
               render={this.renderIdx}
               label="序号"
@@ -323,7 +323,7 @@ export default {
             />
           ) : null}
           {this.headerRender(this.showHeaders)}
-        </Table>
+        </el-table>
         <div class="el-pagination-wrap">
           {!!total && pagination
             ? h(Pagination, { on: pageOn, props: setPageProps })

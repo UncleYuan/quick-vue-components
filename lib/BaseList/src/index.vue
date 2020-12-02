@@ -6,8 +6,8 @@ import PowerfulBtn from "../../PowerfulBtn/src";
 import "./style.scss";
 import cloneDeep from 'lodash/cloneDeep';
 import Button from "element-ui/lib/button";
-import Carousel from "element-ui/lib/carousel";
-import CarouselItem from "element-ui/lib/carousel-item";
+import Collapse from "element-ui/lib/collapse";
+import CollapseItem from "element-ui/lib/collapse-item";
 
 export const makePageUrl = url => {
   return d => `${url}?page_num=${d.pageNum}&page_size=${d.pageSize}`;
@@ -32,8 +32,8 @@ export default {
     QuickForm,
     PowerfulBtn,
     Button,
-    Carousel,
-    CarouselItem
+    Collapse,
+    CollapseItem
   },
   model: DataTable.model,
   props: {
@@ -337,18 +337,18 @@ export default {
     return (
       <div class="base-list">
         {this.haveSearchForm ? (
-          <Carousel
+          <Collapse
             class="base-list-searchbar"
             value={this.showSearchForm ? "search-bar" : ""}
           >
-            <CarouselItem name="search-bar">
+            <CollapseItem name="search-bar">
               <div>
                 <div ref="searchbarInbox" class="base-list-searchbar-inbox">
                   {this.searchBarWrapperRender()}
                 </div>
               </div>
-            </CarouselItem>
-          </Carousel>
+            </CollapseItem>
+          </Collapse>
         ) : null}
         <div ref="btnbar" class="base-list-btnbar">
           {!this.topBtnRender && this.$scopedSlots.topBtnRender
