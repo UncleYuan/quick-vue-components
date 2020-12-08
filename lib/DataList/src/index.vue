@@ -1,6 +1,6 @@
 <script>
+import { Pagination } from "element-ui";
 
-import Pagination from "element-ui/lib/card";
 import loadDataMix from "../../commonMix/loadDataMix";
 export default {
   name: "DataList",

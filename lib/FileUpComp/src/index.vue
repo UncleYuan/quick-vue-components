@@ -1,8 +1,8 @@
 <script>
 import isString from "lodash/isString";
 import isArray from "lodash/isArray";
-import Upload from "element-ui/lib/upload";
 
+import { Upload } from "element-ui";
 export default {
   name: "FileUpComp",
   components: {

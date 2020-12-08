@@ -5,10 +5,7 @@ import QuickForm from "../../QuickForm/src";
 import PowerfulBtn from "../../PowerfulBtn/src";
 import "./style.scss";
 import cloneDeep from 'lodash/cloneDeep';
-import Button from "element-ui/lib/button";
-import Collapse from "element-ui/lib/collapse";
-import CollapseItem from "element-ui/lib/collapse-item";
-
+import { Button, Collapse, CollapseItem } from "element-ui";
 export const makePageUrl = url => {
   return d => `${url}?page_num=${d.pageNum}&page_size=${d.pageSize}`;
 };

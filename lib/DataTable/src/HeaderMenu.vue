@@ -33,8 +33,9 @@
 </template>
 
 <script>
-import Checkbox from "element-ui/lib/checkbox";
-import CheckboxGroup from "element-ui/lib/checkbox-group";
+
+import { Checkbox, CheckboxGroup } from "element-ui";
+
 import $ from "jquery";
 export default {
   components: {

@@ -2,8 +2,7 @@
 
 import BaseList from "../../BaseList";
 import MakeDialogMix from "../../commonMix/MakeDialogMix";
-import Tag from "element-ui/lib/tag";
-import Button from "element-ui/lib/button";
+import { Tag, Button } from "element-ui";
 import "./style.scss";
 export default {
   name: "SelectTable",

@@ -4,8 +4,8 @@
 
 <script>
 import request from '../../utils/request';
-import Button from "element-ui/lib/button";
 
+import { Button } from "element-ui";
 export default {
   name: "GetMessageButton",
   components: { Button },

@@ -2,7 +2,7 @@
 
 import request from "../../utils/request";
 import cloneDeep from "lodash/cloneDeep";
-import Dialog from "element-ui/lib/dialog";
+import { Dialog } from "element-ui";
 import QuickForm from "../../QuickForm/src";
 import "./style.scss";
 export default {
@@ -269,8 +269,6 @@ export default {
       this.editType = idx;
     },
     deleteItem(idx, row) {
-     
-       
       if (this.urlMap.delete) {
         this.loadData(
           "delete",
@@ -282,10 +280,7 @@ export default {
           }
         );
       } else {
-         
-          this.deleteSuccess(idx);
-       
-        
+        this.deleteSuccess(idx);
       }
     },
     moveIdx(move = 1, idx, item) {

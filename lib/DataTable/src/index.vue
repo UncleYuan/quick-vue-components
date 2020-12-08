@@ -3,10 +3,9 @@ import isArray from "lodash/isArray";
 import isEqual from "lodash/isEqual";
 import findIndex from "lodash/findIndex";
 import $ from "jquery";
-import ElTable from "element-ui/lib/table";
-import ElTableColumn from "element-ui/lib/table-column";
-import Pagination from "element-ui/lib/pagination";
-import Popover from "element-ui/lib/popover";
+
+import { ElTable, ElTableColumn, Pagination, Popover } from "element-ui";
+
 import "./style.scss";
 import loadDataMix from "../../commonMix/loadDataMix";
 import HeaderMenu from "./HeaderMenu";

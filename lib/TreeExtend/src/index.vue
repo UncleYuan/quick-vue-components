@@ -5,10 +5,7 @@
  */
 import isEqual from "lodash/isEqual";
 import cloneDeep from "lodash/cloneDeep";
-import Tree from "element-ui/lib/tree";
-import Button from "element-ui/lib/button";
-import Pagination from "element-ui/lib/pagination";
-import Input from "element-ui/lib/input";
+import { Tree, Button, Pagination, Input } from "element-ui";
 import "./style.scss";
 import { setTreeLvKeys, getTreeDataByLvKeys } from "../../utils";
 

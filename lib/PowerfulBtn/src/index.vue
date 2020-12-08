@@ -1,6 +1,5 @@
 <script>
-import Button from "element-ui/lib/button";
-import Dialog from "element-ui/lib/dialog";
+import { Button, Dialog } from "element-ui";
 import cx from "classnames";
 import QuickForm from "../../QuickForm";
 import submitToServerMix from "../../commonMix/submitToServerMix";
@@ -151,8 +150,8 @@ export default {
     formValue: function(newVal) {
       this.$emit("changePowerfulBtnValue", newVal);
     },
-    dialogVisible(){
-        console.log(11111111)
+    dialogVisible() {
+      console.log(11111111);
     }
   },
   methods: {
