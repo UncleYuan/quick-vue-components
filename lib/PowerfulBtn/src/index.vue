@@ -41,7 +41,10 @@ export default {
       type: String,
       default: "diy"
     },
-
+    size: {
+      type: String,
+      default: ""
+    },
     // 内部组件设置props 部分 start
     // 设置Form的props
     toSetQuickformAttr: {
@@ -51,6 +54,10 @@ export default {
     buttonProps: {
       type: Object,
       default: () => ({})
+    },
+    dialogDefaultAttrs: {
+      type: Object,
+      default: () => ({ })
     },
     dialogAttrs: {
       type: Object,
@@ -143,6 +150,9 @@ export default {
     },
     formValue: function(newVal) {
       this.$emit("changePowerfulBtnValue", newVal);
+    },
+    dialogVisible(){
+        console.log(11111111)
     }
   },
   methods: {
@@ -294,6 +304,7 @@ export default {
       const {
         dialogVisible,
         type,
+        dialogDefaultAttrs,
         dialogAttrs,
         formValue,
         toSetQuickformAttr,
@@ -325,6 +336,7 @@ export default {
               title: "提示",
               width: "900px",
               modal: false,
+              ...dialogDefaultAttrs,
               ...dialogAttrs,
               visible: dialogVisible
             },
@@ -345,13 +357,14 @@ export default {
       loading,
       loadingText,
       block,
-
+      size,
       style,
       buttonProps
     } = this;
 
     const setButtonAttrs = {
       block,
+      size: size || undefined,
       ...buttonProps,
       loading
     };

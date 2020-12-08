@@ -116,14 +116,14 @@ export default {
     buttonGroupRender: {
       // 表单项按钮组的渲染函数
       type: Function,
-      default: (value, submitFunc, resetFunc, createElement, validate) => {
+      default: (value, submitFunc, resetFunc, createElement, validate, vm) => {
         // eslint-disable-next-line
         const h = createElement;
         return [
-          <Button type="primary" on-click={submitFunc}>
+          <Button type="primary" size={vm.formSize} on-click={submitFunc}>
             提交
           </Button>,
-          <Button on-click={resetFunc}>重置</Button>
+          <Button size={vm.formSize} on-click={resetFunc}>重置</Button>
         ];
       }
     },
