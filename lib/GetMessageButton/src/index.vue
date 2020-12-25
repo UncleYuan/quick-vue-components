@@ -1,5 +1,5 @@
 <template>
-  <Button type="primary" @click="onBtnClick">{{ defaultText }}</Button>
+  <Button type="primary" :disabled="time>0" @click="onBtnClick">{{ time?`${time}秒后可重新发送`: defaultText }}</Button>
 </template>
 
 <script>
@@ -18,9 +18,17 @@ export default {
       type: String,
       default: ""
     },
+    fetchType: {
+      type: String,
+      default: "post"
+    },
     fetchData: {
       type: Object,
       default: () => ({})
+    },
+    resDataFilter: {
+      type: Function,
+      default: (d) => d
     }
   },
 
@@ -32,14 +40,23 @@ export default {
 
   methods: {
     onBtnClick() {
-      if (!this.url) return;
+      if (!this.url || this.time) return;
       request({
         url: this.url,
-        method: "get",
-        params: this.fetchData
+        method: this.fetchType,
+        [this.fetchType == 'get' ? 'params' : 'data']: this.fetchData
 
       }).then(d => {
-        console.log(d);
+        const res = this.resDataFilter(d);
+        if (res.success) {
+          this.time = 60;
+          this.timer = setInterval(() => {
+            this.time = this.time - 1;
+            if (this.time == 0) {
+              clearInterval(this.timer);
+            }
+          }, 1000);
+        }
       });
     },
     handleReset() {
