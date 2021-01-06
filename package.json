@@ -1,59 +1,61 @@
 {
   "name": "quick-vue-components",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "description": "a vue  component frame",
   "scripts": {
-    "test": "eslint lib/index.js",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "lib": "vue-cli-service build --target lib --name index --dest package lib/index.js"
+    "build:lib": "webpack --config lib.config.js"
   },
+  "main": "libDist/index.js",
   "dependencies": {
-    "axios": "^0.21.0",
     "classnames": "^2.2.6",
+    "core-js": "^3.8.2",
+    "vue": "^2.6.12",
+    "vue-quill-editor": "^3.0.6",
+    "axios": "^0.21.0",
     "element-ui": "^2.14.1",
     "jquery": "^3.5.1",
     "lodash": "^4.17.20",
-    "moment": "^2.29.1",
-    "quick-vue-components": "^1.1.7",
-    "sass-loader": "^10.1.0",
-    "vue": "^2.6.10",
-    "vue-quill-editor": "^3.0.6"
+    "moment": "^2.29.1"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.4.0",
-    "@vue/cli-plugin-eslint": "^3.4.0",
-    "@vue/cli-service": "^3.4.0",
-    "babel-eslint": "^10.0.1",
-    "babel-plugin-component": "^1.1.1",
-    "eslint": "^5.8.0",
-    "eslint-config-standard": "^12.0.0",
-    "eslint-friendly-formatter": "^4.0.1",
-    "eslint-loader": "^2.1.2",
-    "eslint-plugin-import": "^2.16.0",
-    "eslint-plugin-node": "^8.0.1",
-    "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-standard": "^4.0.0",
-    "eslint-plugin-vue": "^5.0.0",
-    "vue-template-compiler": "^2.5.21"
+    "@vue/cli-plugin-babel": "^4.5.10",
+    "@vue/cli-plugin-eslint": "^4.5.10",
+    "@vue/cli-service": "^4.5.10",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.0.1",
+    "eslint": "^6.8.0",
+    "eslint-plugin-vue": "^6.2.2",
+    "progress-bar-webpack-plugin": "^2.1.0",
+    "sass-loader": "^10.1.0",
+    "style-loader": "^2.0.0",
+    "vue-loader": "^15.9.6",
+    "vue-template-compiler": "^2.6.12",
+    "webpack": "^4.44.2",
+    "webpack-bundle-analyzer": "^4.3.0",
+    "webpack-cli": "^4.3.1"
   },
-  "main": "lib/index.js",
-  "style": "package/index.css",
-  "files": [
-    "lib",
-    "package",
-    "static"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/UncleYuan/quick-vue-components.git"
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {}
   },
-  "keywords": [
-    "quick-vue-components",
-    "templete",
-    "vue",
-    "vue-ui"
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
   ],
   "author": "UncleYuan",
   "license": "MIT",
