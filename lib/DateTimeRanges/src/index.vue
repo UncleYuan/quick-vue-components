@@ -105,8 +105,8 @@ export default {
     },
     disabledDate(time) {
       let res = false;
-      this.list.map(o => {
-        if (!(moment(time).isBefore(o.startTime) || moment(time).isAfter(o.endTime))) {
+      this.list.map((o, i) => {
+        if (this.editIdx != i && (!(moment(time).isBefore(o.startTime) || moment(time).isAfter(o.endTime)))) {
           res = true;
         }
       });

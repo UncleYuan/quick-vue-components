@@ -7,7 +7,7 @@ const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
 
 module.exports = {
   entry: {
-    index: "./lib/index.js",
+    index: "./lib/index.js"
   },
   mode: "production",
   output: {
@@ -18,69 +18,69 @@ module.exports = {
     libraryTarget: "umd", // 定义打包方式
     globalObject: "this",
     umdNamedDefine: true,
-    filename: "index.js",
+    filename: "index.js"
   },
   resolve: {
-    extensions: [".js", ".vue"],
+    extensions: [".js", ".vue"]
   },
   externals: {
     jquery: {
       commonjs: "jquery",
       commonjs2: "jquery",
       amd: "jquery",
-      root: "jQuery",
+      root: "jQuery"
     },
     "element-ui": {
       commonjs: "element-ui",
       commonjs2: "element-ui",
       amd: "element-ui",
-      root: "elementUi",
+      root: "elementUi"
     },
     moment: {
       commonjs: "moment",
       commonjs2: "moment",
       amd: "moment",
-      root: "moment",
+      root: "moment"
     },
     axios: {
       commonjs: "axios",
       commonjs2: "axios",
       amd: "axios",
-      root: "axios",
+      root: "axios"
     },
     lodash: {
       commonjs: "lodash",
       commonjs2: "lodash",
       amd: "lodash",
-      root: "_",
+      root: "_"
     },
     "vue-quill-editor": {
       commonjs: "vue-quill-editor",
       commonjs2: "vue-quill-editor",
       amd: "vue-quill-editor",
-      root: "VueQuillEditor",
-    },
+      root: "VueQuillEditor"
+    }
   },
   module: {
     rules: [
       {
         test: /\.vue$/,
-        loader: "vue-loader",
+        loader: "vue-loader"
       },
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: "babel-loader",
+        loader: "babel-loader"
       },
       {
         test: /\.s?css$/,
-        loader: ["style-loader", "css-loader", "sass-loader"],
-      },
-    ],
+        loader: ["style-loader", "css-loader", "sass-loader"]
+      }
+    ]
   },
   plugins: [
     new ProgressBarPlugin(),
     new VueLoaderPlugin(), // 开启 BundleAnalyzerPlugin
-    new BundleAnalyzerPlugin(),
-  ],
+    new BundleAnalyzerPlugin()
+  ]
 };
