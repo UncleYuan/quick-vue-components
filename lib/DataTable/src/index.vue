@@ -267,14 +267,14 @@ export default {
       background: true,
       ...pageProps,
       "current-page": currentPage,
-      pageSize
+      pageSize:pagination?pageSize:1000000000,
     };
 
     // 设置显示序号
     const idxScopedSlots = {
       default: scope => {
         return (
-          <span>{scope.$index + (this.pageSize * (currentPage - 1) + 1)}</span>
+          <span>{scope.$index + ((pagination?this.pageSize:0) * (currentPage - 1) + 1)}</span>
         );
       }
     };

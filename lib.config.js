@@ -9,7 +9,7 @@ module.exports = {
   entry: {
     index: "./lib/index.js"
   },
-  mode: "production",
+
   output: {
     path: path.resolve(__dirname, "./libdist"),
     publicPath: "./",
@@ -20,9 +20,13 @@ module.exports = {
     umdNamedDefine: true,
     filename: "index.js"
   },
+  optimization: { //
+    minimize: false
+  },
   resolve: {
     extensions: [".js", ".vue"]
   },
+  devtool: "source-map", //
   externals: {
     jquery: {
       commonjs: "jquery",

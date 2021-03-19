@@ -42,13 +42,13 @@ export default {
       pageSizes: [10, 30, 50],
       ...pageProps,
       "current-page": currentPage,
-      pageSize
+      pageSize:pagination?pageSize:1000000000,
     };
 
     return (
       <div class="comp-datalist" style={style}>
         <div class="comp-datalist-box" style={listStyle}>
-          {listData.map((item, idx) => idx >= pageSize ? null : this.$scopedSlots.default({ ...item, idx }))}
+          {listData.map((item, idx) =>( idx >= pageSize && pagination) ? null : this.$scopedSlots.default({ ...item, idx }))}
         </div>
         {!!total && pagination
           ? h(Pagination, { on: pageOn, props: setPageProps })
