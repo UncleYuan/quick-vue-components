@@ -6353,18 +6353,27 @@ if (isForced(NUMBER, !NativeNumber(' 0o1') || !NativeNumber('0b1') || NativeNumb
                 fetchData = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : _this.fetchData;
                 disabledFilter = _arguments.length > 1 ? _arguments[1] : undefined;
                 url = _this.url, fetchType = _this.fetchType, successText = _this.successText, beforeFetch = _this.beforeFetch, afterSubmitSuccess = _this.afterSubmitSuccess, fetchDataFilter = _this.fetchDataFilter, getFile = _this.getFile, defaultResFilter = _this.defaultResFilter, isResultSuccess = _this.isResultSuccess, showSuccessTip = _this.showSuccessTip;
-                goFetch = true; // 是否提交的方法
 
-                setUrl = lodash_isFunction__WEBPACK_IMPORTED_MODULE_7___default()(url) ? url(fetchData) : url;
-
-                if (setUrl) {
-                  _context.next = 7;
+                if (!_this.loading) {
+                  _context.next = 5;
                   break;
                 }
 
                 return _context.abrupt("return");
 
-              case 7:
+              case 5:
+                goFetch = true; // 是否提交的方法
+
+                setUrl = lodash_isFunction__WEBPACK_IMPORTED_MODULE_7___default()(url) ? url(fetchData) : url;
+
+                if (setUrl) {
+                  _context.next = 9;
+                  break;
+                }
+
+                return _context.abrupt("return");
+
+              case 9:
                 if (fetchData) delete fetchData.isTrusted;
 
                 if (lodash_isFunction__WEBPACK_IMPORTED_MODULE_7___default()(fetchDataFilter) && !disabledFilter) {
@@ -6392,14 +6401,14 @@ if (isForced(NUMBER, !NativeNumber(' 0o1') || !NativeNumber('0b1') || NativeNumb
                 if (fetchData) delete fetchData.isTrusted;
 
                 if (!goFetch) {
-                  _context.next = 42;
+                  _context.next = 44;
                   break;
                 }
 
                 _this.changeLoadingStatus(true);
 
                 if (!getFile) {
-                  _context.next = 18;
+                  _context.next = 20;
                   break;
                 }
 
@@ -6408,22 +6417,22 @@ if (isForced(NUMBER, !NativeNumber(' 0o1') || !NativeNumber('0b1') || NativeNumb
 
                 return _context.abrupt("return");
 
-              case 18:
-                _context.prev = 18;
-                _context.next = 21;
+              case 20:
+                _context.prev = 20;
+                _context.next = 23;
                 return Object(_utils_request__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"])(Object(D_working_quick_vue_components_node_modules_babel_runtime_7_12_18_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])(Object(D_working_quick_vue_components_node_modules_babel_runtime_7_12_18_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])({
                   url: setUrl,
                   method: fetchType
                 }, fetchType == "get" ? "params" : "data", fetchData), setFetchConfig));
 
-              case 21:
+              case 23:
                 res = _context.sent;
                 res = defaultResFilter(res);
 
                 _this.changeLoadingStatus(false);
 
                 if (!isResultSuccess(res)) {
-                  _context.next = 31;
+                  _context.next = 33;
                   break;
                 }
 
@@ -6442,19 +6451,19 @@ if (isForced(NUMBER, !NativeNumber(' 0o1') || !NativeNumber('0b1') || NativeNumb
 
                 _this.onSuccessReset();
 
-                _context.next = 32;
+                _context.next = 34;
                 break;
 
-              case 31:
+              case 33:
                 throw res || {};
 
-              case 32:
-                _context.next = 42;
+              case 34:
+                _context.next = 44;
                 break;
 
-              case 34:
-                _context.prev = 34;
-                _context.t0 = _context["catch"](18);
+              case 36:
+                _context.prev = 36;
+                _context.t0 = _context["catch"](20);
                 console.log(_context.t0);
 
                 _this.changeLoadingStatus(false);
@@ -6474,12 +6483,12 @@ if (isForced(NUMBER, !NativeNumber(' 0o1') || !NativeNumber('0b1') || NativeNumb
                   });
                 }
 
-              case 42:
+              case 44:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[18, 34]]);
+        }, _callee, null, [[20, 36]]);
       }))();
     }
   }
