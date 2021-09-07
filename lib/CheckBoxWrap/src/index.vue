@@ -1,9 +1,9 @@
 <template>
   <div>
-    <Radio v-if="isToggleOptions" v-model="isShowOptions" label="1">有</Radio>
-    <Radio v-if="isToggleOptions" v-model="isShowOptions" label="0">无</Radio>
+    <Radio v-if="isToggleOptions" :disabled="disabled" v-model="isShowOptions" label="1">有</Radio>
+    <Radio v-if="isToggleOptions" :disabled="disabled" v-model="isShowOptions" label="0">无</Radio>
     <div v-if="!isToggleOptions||(isToggleOptions&&isShowOptions=='1')" style="display:inline-block">
-      <component :is="comNameWrap" v-model="changeValue">
+      <component  :disabled="disabled" :is="comNameWrap" v-model="changeValue">
         <component
           :is="comName"
           v-for="obj in options"
@@ -14,10 +14,10 @@
     </div>
 
     <div style="display:inline-block;margin-left:15px;vertical-align: middle;">
-      <Input v-if="isTextValue&&isAddInput" v-model="addTextValue" placeholder="其他" />
+      <Input v-if="isTextValue&&isAddInput"  :disabled="disabled" v-model="addTextValue" placeholder="其他" />
     </div>
     <i
-      v-if="isTextValue"
+      v-if="!disabled&&isTextValue"
       class="el-icon-close"
       style="margin-left:15px;cursor: pointer;"
       @click="clearValue"
@@ -56,6 +56,10 @@ export default {
     options: {
       type: [Array],
       default: () => []
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     },
     isTextValue: {
       type: Boolean,

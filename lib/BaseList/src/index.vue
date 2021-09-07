@@ -34,6 +34,40 @@ export default {
   },
   model: DataTable.model,
   props: {
+      /**
+     * 配置请求实例
+     */
+    fetchApi: {
+      type: [Boolean, Function],
+      default: false
+    },
+     /**
+     * 配置请求的url
+     */
+    url: {
+      type: String
+    },
+    /**
+     * 配置请求的类型
+     */
+    fetchType: {
+      type: String,
+      default: "get"
+    },
+     /**
+     * 配置请求带的数据
+     */
+    fetchData: {
+      type: [Object, Array, String],
+      default: () => ({})
+    },
+     /**
+     * 配置请求的数据过滤方法
+     */
+    fetchDataFilter: {
+      type:[Boolean, Function],
+      default:false
+    },
     afterMounted: {
       // 当组件渲染完成时的回调
       type: Function,
@@ -76,6 +110,15 @@ export default {
         report: ""
       })
     },
+    methodMap: {
+      // url 请求方式索引
+      type: Object,
+      default: () => ({
+        list: "post",
+        delete: "post",
+        import: "post"
+      })
+    },
     defaultFetchData: {
       // 列表默认请求带的参数
       type: Object,
@@ -95,15 +138,7 @@ export default {
       type: Object,
       default: () => ({})
     },
-    methodMap: {
-      // url 请求方式索引
-      type: Object,
-      default: () => ({
-        list: "post",
-        delete: "post",
-        import: "post"
-      })
-    },
+    
     mergeFetchData: {
       // 会合并到 获取列表请求的参数
       type: Object,
@@ -370,16 +405,18 @@ export default {
                 expression: `mutipleSelection`
               },
               attrs: {
-                url: urlMap.list,
-                fetchType: methodMap.list,
-
+                url: urlMap.list ||this.url,
+                fetchType:  methodMap.list||this.fetchType,
                 fetchData: {
                   ...defaultFetchData,
                   ...this.searchForm,
-                  ...mergeFetchData
+                  ...mergeFetchData,
+                  ...this.fetchData,
                 },
                 tableHeader,
                 ...this.tableAttrs,
+                fetchApi:this.fetchApi||undefined,
+                fetchDataFilter:this.tableAttrs.fetchDataFilter|| this.fetchDataFilter||undefined,
                 tableAttrs: {
                   border: true,
                   height: this.listPageTableHeight || undefined,

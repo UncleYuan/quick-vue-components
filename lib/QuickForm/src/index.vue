@@ -117,7 +117,7 @@ export default {
         // eslint-disable-next-line
         const h = createElement;
         return [
-          <Button type="primary" size={vm.formSize} on-click={submitFunc}>
+          <Button type="primary" loading={vm.loading} size={vm.formSize} on-click={submitFunc}>
             提交
           </Button>,
           <Button size={vm.formSize} on-click={resetFunc}>重置</Button>
@@ -281,6 +281,7 @@ export default {
         valueFormula,
         afterItemValueChange,
         fieldAttrs,
+        scopedSlots,
         ...filterBaseProps
       } = baseProps;
 
@@ -344,7 +345,8 @@ export default {
               }
             },
             expression: `formValue.${name}`
-          }
+          },
+          scopedSlots:scopedSlots
         },
 
         renderMemberComponent || type == "onlyLabel"

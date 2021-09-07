@@ -151,6 +151,13 @@ export default {
       }
       this.mutipleSelection = val;
     },
+     /**
+     * 排序变化后的回调
+     * @param {Object} 选中行的数据
+     */
+    onSortChange(e){
+      console.log(e);
+    },
     /**
      * 修改选中行的方法
      * @param  {Object} newVal 新的选中行数据
@@ -305,7 +312,7 @@ export default {
                 expression: "loading"
               }
             ],
-            on: { "selection-change": this.onSelectChange },
+            on: { "selection-change": this.onSelectChange,"sort-change": this.onSortChange	 },
             attrs: { border: true, ...tableAttrs }
           }}
           data={ isArray(listData) ? listData : []}

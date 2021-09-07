@@ -1,5 +1,4 @@
 <script>
-
 import request from "../../utils/request";
 import cloneDeep from "lodash/cloneDeep";
 import { Dialog } from "element-ui";
@@ -13,59 +12,59 @@ export default {
    */
   model: {
     prop: "value", // 要存在于props
-    event: "changeTodoListValue" // 当组件的值发生改变时要emit的事件名
+    event: "changeTodoListValue", // 当组件的值发生改变时要emit的事件名
   },
 
   props: {
     typeTitle: {
       type: String,
-      default: "表单项"
+      default: "表单项",
     },
     className: {
       type: String,
-      default: ""
+      default: "",
     },
     showLabelRender: {
       type: Function,
-      default: row => row.label
+      default: (row) => row.label,
     },
 
     editRowDataFilter: {
       type: Function,
-      default: row => row
+      default: (row) => row,
     },
     options: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     disabled: {
       type: Boolean,
-      default: false
+      default: false,
     },
     disabledMove: {
       type: Boolean,
-      default: false
+      default: false,
     },
     disabledAdd: {
       type: Boolean,
-      default: false
+      default: false,
     },
     value: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     editItemDataFilter: {
       type: Function,
-      default: v => v
+      default: (v) => v,
     },
 
     resetItemFormDataFilter: {
       type: Function,
-      default: v => v
+      default: (v) => v,
     },
     addButtonRender: {
       type: [Boolean, Function],
-      default: false
+      default: false,
     },
 
     urlMap: {
@@ -74,8 +73,8 @@ export default {
         get: "",
         add: "",
         edit: "",
-        delete: ""
-      })
+        delete: "",
+      }),
     },
 
     methodMap: {
@@ -84,29 +83,29 @@ export default {
         get: "post",
         add: "post",
         edit: "post",
-        delete: "post"
-      })
+        delete: "post",
+      }),
     },
 
     fetchDataFilter: {
       type: Function,
-      default: (data, type) => data
+      default: (data, type) => data,
     },
     resDataFilter: {
       type: Function,
-      default: (data, type) => data
+      default: (data, type) => data,
     },
     afterLoadDataSuccess: {
       type: Function,
-      default: res => res
+      default: (res) => res,
     },
     beforeChangeListFilter: {
       type: Function,
-      default: res => res
+      default: (res) => res,
     },
     isSuccess: {
       type: Function,
-      default: res => res
+      default: (res) => res,
     },
     editFormRenderData: {
       type: Array,
@@ -116,28 +115,28 @@ export default {
           name: "label",
           layoutCol: 12,
           label: "标题",
-          rules: [{ required: true }]
+          rules: [{ required: true }],
         },
         {
           type: "text",
           name: "value",
           layoutCol: 12,
           label: "值",
-          rules: [{ required: true }]
-        }
-      ]
+          rules: [{ required: true }],
+        },
+      ],
     },
     dialogAttrs: {
       type: Object,
-      default: res => ({})
+      default: (res) => ({}),
     },
     formProps: {
       type: Object,
-      default: res => ({})
+      default: (res) => ({}),
     },
     editFormProps: {
       type: Object,
-      default: res => ({})
+      default: (res) => ({}),
     },
     rowRender: {
       type: Function,
@@ -204,34 +203,34 @@ export default {
                 icon="el-icon-delete"
               />
             )}
-          </el-tag>
+          </el-tag>,
         ];
-      }
-    }
+      },
+    },
   },
   data() {
     return {
       groupValue: this.value || this.options || [],
       editDialogVisible: false,
       editFormValue: {},
-      editType: "add"
+      editType: "add",
     };
   },
   // 监听formValue变化传递变化
   watch: {
-    groupValue: function(newVal, oldVal) {
+    groupValue: function (newVal, oldVal) {
       this.$emit("changeTodoListValue", newVal);
     },
-    options: function(newVal) {
+    options: function (newVal) {
       this.groupValue = newVal;
     },
-    value: function(newVal) {
+    value: function (newVal) {
       this.groupValue = newVal;
-    }
+    },
   },
   created() {
     if (this.urlMap.get) {
-      this.loadData("get", this.urlMap.get, this.methodMap.get, {}, res => {
+      this.loadData("get", this.urlMap.get, this.methodMap.get, {}, (res) => {
         this.groupValue = res.data || [];
       });
     }
@@ -242,15 +241,19 @@ export default {
       request({
         url: url,
         method: fetchType,
-        [fetchType == "get" ? "params" : "data"]: this.fetchDataFilter(fetchData, type)
-      }).then(res => {
-        res = this.resDataFilter(res, type);
-        if (this.isSuccess(res, type)) {
-          this.afterLoadDataSuccess(res, type);
-          cb(res, type);
-        }
+        [fetchType == "get" ? "params" : "data"]: this.fetchDataFilter(
+          fetchData,
+          type
+        ),
       })
-        .catch(err => {
+        .then((res) => {
+          res = this.resDataFilter(res, type);
+          if (this.isSuccess(res, type)) {
+            this.afterLoadDataSuccess(res, type);
+            cb(res, type);
+          }
+        })
+        .catch((err) => {
           console.log(err);
           const errMsg = err.message || err.msg;
           if (errMsg) {
@@ -307,12 +310,14 @@ export default {
     addSuccess(v) {
       v = this.editRowDataFilter(v);
       this.groupValue.push(v);
+       this.$emit("changeTodoListValue", this.groupValue);
       this.resetEditStatus();
     },
     editSuccess(v) {
       v = this.editRowDataFilter(v);
       this.groupValue[parseFloat(this.editType)] = v;
       this.groupValue = this.getJson(this.groupValue);
+      this.$emit("changeTodoListValue", this.groupValue);
       this.resetEditStatus();
     },
     deleteSuccess(idx) {
@@ -324,9 +329,15 @@ export default {
 
       if (this.editType == "add") {
         if (this.urlMap.add) {
-          this.loadData("add", this.urlMap.add, this.methodMap.add, v, res => {
-            this.addSuccess(this.beforeChangeListFilter(v, res, "add"));
-          });
+          this.loadData(
+            "add",
+            this.urlMap.add,
+            this.methodMap.add,
+            v,
+            (res) => {
+              this.addSuccess(this.beforeChangeListFilter(v, res, "add"));
+            }
+          );
         } else {
           this.addSuccess(v);
         }
@@ -337,7 +348,7 @@ export default {
             this.urlMap.edit,
             this.methodMap.edit,
             v,
-            res => {
+            (res) => {
               this.editSuccess(this.beforeChangeListFilter(v, res, "edit"));
             }
           );
@@ -350,7 +361,7 @@ export default {
       const formProps = {
         labelPosition: "right",
         labelWidth: "150px",
-        ...this.formProps
+        ...this.formProps,
       };
       return this.$createElement(
         Dialog,
@@ -360,13 +371,13 @@ export default {
             title: (this.editType == "add" ? "添加" : "编辑") + this.typeTitle,
             width: "1000px",
             visible: this.editDialogVisible,
-            ...this.dialogAttrs
+            ...this.dialogAttrs,
           },
           on: {
-            "update:visible": $event => {
+            "update:visible": ($event) => {
               this.editDialogVisible = $event;
-            }
-          }
+            },
+          },
         },
         [
           <QuickForm
@@ -374,7 +385,7 @@ export default {
               attrs: {
                 formProps,
                 propsData: {
-                  todoEditIdx: this.editType
+                  todoEditIdx: this.editType,
                 },
                 onSubmit: this.afterEditItemSuccess,
                 value: this.editFormValue,
@@ -385,8 +396,8 @@ export default {
 
                   style: {
                     "text-align": "center",
-                    margin: "20px 0 0"
-                  }
+                    margin: "20px 0 0",
+                  },
                 },
                 buttonGroupRender: (
                   value,
@@ -395,7 +406,7 @@ export default {
                   createElement,
                   validate
                 ) => {
-                //  const h = createElement;
+                  //  const h = createElement;
                   return [
                     this.disabled ? null : (
                       <el-button type="primary" on-click={submitFunc}>
@@ -406,16 +417,16 @@ export default {
                       on-click={() => (this.editDialogVisible = false)}
                     >
                       关闭
-                    </el-button>
+                    </el-button>,
                   ];
                 },
-                ...this.editFormProps
-              }
+                ...this.editFormProps,
+              },
             }}
-          />
+          />,
         ]
       );
-    }
+    },
   },
   render(h) {
     const { groupValue, className, rowRender } = this;
@@ -438,22 +449,33 @@ export default {
         </div>
         <div class="comp-todolist-listGroup">
           {groupValue.map((item, idx) =>
-            rowRender(
-              item,
-              idx,
-              groupValue,
-              this.createItem,
-              this.editItem,
-              this.deleteItem,
-              this.moveIdx,
-              this.$createElement,
-              this.disabled,
-              this
-            )
+           this.$scopedSlots.default ?
+            this.$scopedSlots.default({
+                  item,
+                  idx,
+                  groupValue,
+                  createItem: this.createItem,
+                  editItem: this.editItem,
+                  deleteItem: this.deleteItem,
+                  moveIdx: this.moveIdx,
+                  disabled: this.disabled,
+                })
+              : rowRender(
+                  item,
+                  idx,
+                  groupValue,
+                  this.createItem,
+                  this.editItem,
+                  this.deleteItem,
+                  this.moveIdx,
+                  this.$createElement,
+                  this.disabled,
+                  this
+                )
           )}
         </div>
       </div>
     );
-  }
+  },
 };
 </script>
